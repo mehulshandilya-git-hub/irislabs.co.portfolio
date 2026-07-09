@@ -189,7 +189,6 @@ body { font-family: var(--font-body); color: var(--dark); background: var(--whit
         <li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <a href="#contact" class="btn btn-primary nav-cta">Start a Project</a>
       <div class="nav-toggle" id="navToggle">
         <span></span><span></span><span></span>
       </div>
@@ -207,7 +206,6 @@ body { font-family: var(--font-body); color: var(--dark); background: var(--whit
       <p class="hero-text">From jewelry stores to bakeries — we craft stunning, high-performing websites that help local businesses shine online.</p>
       <div class="hero-buttons">
         <a href="#work" class="btn btn-primary">View Our Work</a>
-        <a href="#contact" class="btn btn-outline">Get in Touch</a>
       </div>
       <div class="hero-clients">
         <span>Trusted by</span>
@@ -425,59 +423,40 @@ body { font-family: var(--font-body); color: var(--dark); background: var(--whit
 
   <section id="contact" class="contact">
     <div class="container">
-      <div class="contact-grid">
-        <div class="contact-info">
-          <span class="section-tag">Let's Talk</span>
-          <h2>Ready to Build Your Website?</h2>
-          <p>Tell us about your project and we'll craft a solution that fits your brand and budget.</p>
-          <div class="contact-details">
-            <div class="contact-item">
-              <i class="fas fa-envelope"></i>
-              <div>
-                <h4>Email</h4>
-                <p>kavyajha1620@gmail.com</p>
-              </div>
+      <div class="contact-info" style="text-align:center; max-width:600px; margin:0 auto;">
+        <span class="section-tag">Let's Talk</span>
+        <h2>Ready to Build Your Website?</h2>
+        <p>Tell us about your project and we'll craft a solution that fits your brand and budget.</p>
+        <div class="contact-details" style="margin-top:40px; display:flex; flex-direction:column; gap:24px; align-items:center;">
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <h4>Email</h4>
+              <p>kavyajha1620@gmail.com</p>
             </div>
-            <div class="contact-item">
-              <i class="fas fa-phone"></i>
-              <div>
-                <h4>Phone</h4>
-                <p>+91 7250956394</p>
-              </div>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <div>
+              <h4>Phone</h4>
+              <p>+91 7250956394</p>
             </div>
-            <div class="contact-item">
-              <i class="fas fa-map-marker-alt"></i>
-              <div>
-                <h4>Location</h4>
-                <p>Serving businesses worldwide — remote-first</p>
-              </div>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <h4>Location</h4>
+              <p>Serving businesses worldwide — remote-first</p>
             </div>
-            <div class="contact-item">
-              <i class="fas fa-clock"></i>
-              <div>
-                <h4>Response Time</h4>
-                <p>Typically within 24 hours</p>
-              </div>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-clock"></i>
+            <div>
+              <h4>Response Time</h4>
+              <p>Typically within 24 hours</p>
             </div>
           </div>
         </div>
-        <form class="contact-form" id="contactForm">
-          <div class="form-row">
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-          </div>
-          <input type="text" placeholder="Company Name">
-          <select required>
-            <option value="">What type of website?</option>
-            <option>Jewelry Store</option>
-            <option>Bakery / Restaurant</option>
-            <option>E-commerce Store</option>
-            <option>Portfolio / Brand Site</option>
-            <option>Other</option>
-          </select>
-          <textarea placeholder="Tell us about your project..." rows="5" required></textarea>
-          <button type="submit" class="btn btn-primary">Send Message <i class="fas fa-arrow-right"></i></button>
-        </form>
       </div>
     </div>
   </section>
@@ -532,8 +511,6 @@ body { font-family: var(--font-body); color: var(--dark); background: var(--whit
       </div>
     </div>
   </footer>
-
-  <div class="toast" id="toast"></div>
 
   <script src="js/script.js"></script>
 </body>
