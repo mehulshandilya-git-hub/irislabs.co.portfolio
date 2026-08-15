@@ -3,515 +3,1373 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IrisLabs — Web Design & Development Agency</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <title>Iris Labs — AI for Modern Companies</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
   <style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --primary: #7C3AED;
-  --primary-dark: #5B21B6;
-  --primary-light: #A78BFA;
-  --primary-glow: rgba(124, 58, 237, 0.3);
-  --accent: #F59E0B;
-  --dark: #0F0A1A;
-  --dark-alt: #1A122E;
-  --gray: #6B7280;
-  --gray-light: #9CA3AF;
-  --light: #F5F3FF;
-  --white: #FFFFFF;
-  --font-display: 'Space Grotesk', sans-serif;
-  --font-body: 'Inter', sans-serif;
-}
-html { scroll-behavior: smooth; }
-body { font-family: var(--font-body); color: var(--dark); background: var(--white); overflow-x: hidden; }
-.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-#header { position: fixed; top: 0; width: 100%; z-index: 1000; transition: background 0.4s, box-shadow 0.4s; }
-#header.scrolled { background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); box-shadow: 0 1px 20px rgba(0,0,0,0.06); }
-.navbar { display: flex; align-items: center; justify-content: space-between; padding: 18px 40px; max-width: 1400px; margin: 0 auto; }
-.logo { font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--dark); text-decoration: none; letter-spacing: -0.5px; }
-.logo span { color: var(--primary); }
-.nav-links { display: flex; list-style: none; gap: 32px; }
-.nav-links a { text-decoration: none; color: var(--gray); font-size: 14px; font-weight: 500; transition: color 0.3s; position: relative; }
-.nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--primary); transition: width 0.3s; }
-.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
-.nav-links a:hover, .nav-links a.active { color: var(--primary); }
-.nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1001; }
-.nav-toggle span { width: 24px; height: 2px; background: var(--dark); transition: 0.3s; }
-.nav-cta { padding: 10px 24px; font-size: 13px; }
+    :root {
+      --bg: #0a0a0a;
+      --bg-secondary: #111111;
+      --bg-card: #161616;
+      --text: #f0f0f0;
+      --text-muted: #888888;
+      --text-dim: #555555;
+      --accent: #c8a2ff;
+      --accent-dim: rgba(200, 162, 255, 0.1);
+      --border: #222222;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
 
-.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; font-size: 14px; font-weight: 500; letter-spacing: 0.3px; text-decoration: none; transition: all 0.3s; cursor: pointer; border: none; font-family: var(--font-body); border-radius: 8px; }
-.btn-primary { background: var(--primary); color: var(--white); }
-.btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 8px 24px var(--primary-glow); }
-.btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.3); }
-.btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+    html {
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: #333 #0a0a0a;
+    }
 
-.hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: var(--dark); padding: 120px 24px 80px; }
-.hero-bg { position: absolute; inset: 0; overflow: hidden; }
-.gradient-sphere { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(124,58,237,0.3), transparent 70%); top: -200px; right: -200px; animation: float 8s ease-in-out infinite; }
-.gradient-sphere.two { width: 500px; height: 500px; background: radial-gradient(circle, rgba(245,158,11,0.15), transparent 70%); bottom: -200px; left: -200px; top: auto; right: auto; animation-delay: -4s; }
-@keyframes float { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(30px,-30px) scale(1.05); } }
-.hero-content { position: relative; z-index: 2; text-align: center; max-width: 800px; }
-.hero-badge { display: inline-block; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--primary-light); border: 1px solid rgba(167,139,250,0.2); padding: 8px 20px; border-radius: 100px; margin-bottom: 32px; }
-.hero-title { font-family: var(--font-display); font-size: clamp(40px,7vw,80px); font-weight: 700; color: var(--white); line-height: 1.05; margin-bottom: 24px; }
-.hero-title span { background: linear-gradient(135deg, var(--primary-light), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.hero-text { font-size: 18px; line-height: 1.7; color: var(--gray-light); margin: 0 auto 40px; max-width: 560px; }
-.hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-.hero-clients { margin-top: 64px; opacity: 0.5; }
-.hero-clients > span { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--gray-light); display: block; margin-bottom: 16px; }
-.client-logos { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; }
-.client-logos span { font-size: 14px; color: var(--gray-light); opacity: 0.7; font-weight: 500; }
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
-.section-header { text-align: center; margin-bottom: 60px; }
-.section-tag { display: inline-block; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--primary); font-weight: 600; margin-bottom: 12px; }
-.section-header h2 { font-family: var(--font-display); font-size: clamp(32px,4vw,48px); font-weight: 700; color: var(--dark); margin-bottom: 12px; }
-.section-header p { font-size: 16px; color: var(--gray); max-width: 500px; margin: 0 auto; line-height: 1.6; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-.services { padding: 120px 0; background: var(--white); }
-.services-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; }
-.service-card { padding: 40px 28px; border-radius: 16px; background: var(--white); border: 1px solid rgba(0,0,0,0.06); transition: all 0.4s; }
-.service-card:hover { border-color: var(--primary); box-shadow: 0 12px 40px rgba(124,58,237,0.08); transform: translateY(-4px); }
-.service-icon { width: 56px; height: 56px; border-radius: 12px; background: var(--light); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 22px; color: var(--primary); transition: all 0.4s; }
-.service-card:hover .service-icon { background: var(--primary); color: var(--white); }
-.service-card h3 { font-family: var(--font-display); font-size: 18px; margin-bottom: 8px; color: var(--dark); }
-.service-card p { font-size: 14px; color: var(--gray); line-height: 1.7; }
+    .serif {
+      font-family: var(--serif);
+      font-style: italic;
+    }
 
-.work { padding: 120px 0; background: var(--light); }
-.work-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 28px; }
-.work-card { background: var(--white); border-radius: 16px; overflow: hidden; transition: all 0.4s; }
-.work-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(0,0,0,0.08); }
-.work-img { position: relative; aspect-ratio: 16/10; overflow: hidden; }
-.work-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
-.work-card:hover .work-img img { transform: scale(1.05); }
-.work-overlay { position: absolute; inset: 0; background: rgba(15,10,26,0.7); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.4s; }
-.work-card:hover .work-overlay { opacity: 1; }
-.work-links .btn { padding: 10px 20px; font-size: 12px; }
-.work-info { padding: 24px; }
-.work-tag { display: inline-block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); background: var(--light); padding: 4px 12px; border-radius: 100px; margin-bottom: 8px; }
-.work-info h3 { font-family: var(--font-display); font-size: 18px; margin-bottom: 6px; color: var(--dark); }
-.work-info p { font-size: 14px; color: var(--gray); line-height: 1.6; }
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 3rem;
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
 
-.stats-section { padding: 80px 0; background: var(--dark); }
-.stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 32px; }
-.stat-item { text-align: center; }
-.stat-number { display: block; font-family: var(--font-display); font-size: 44px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
-.stat-label { font-size: 14px; color: var(--gray-light); letter-spacing: 0.5px; }
+    nav.scrolled {
+      padding: 0.85rem 3rem;
+    }
 
-.about { padding: 120px 0; background: var(--white); }
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-.about-content h2 { font-family: var(--font-display); font-size: clamp(28px,3vw,40px); font-weight: 700; color: var(--dark); margin-bottom: 16px; line-height: 1.2; }
-.about-content > p { font-size: 15px; line-height: 1.8; color: var(--gray); margin-bottom: 14px; }
-.about-features { margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
-.about-feature { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--dark); font-weight: 500; }
-.about-feature i { color: var(--primary); font-size: 18px; }
-.about-image { border-radius: 16px; overflow: hidden; }
-.about-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
 
-.testimonials { padding: 120px 0; background: var(--light); }
-.testimonial-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
-.testimonial-card { background: var(--white); padding: 36px; border-radius: 16px; border: 1px solid rgba(0,0,0,0.04); }
-.stars { color: var(--accent); font-size: 14px; margin-bottom: 16px; }
-.testimonial-card > p { font-size: 14px; line-height: 1.8; color: var(--gray); margin-bottom: 20px; font-style: italic; }
-.client-info h4 { font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 2px; }
-.client-info span { font-size: 12px; color: var(--gray); }
+    .nav-logo span {
+      color: var(--accent);
+    }
 
-.contact { padding: 120px 0; background: var(--white); }
-.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
-.contact-info h2 { font-family: var(--font-display); font-size: clamp(28px,3vw,40px); font-weight: 700; color: var(--dark); margin-bottom: 12px; }
-.contact-info > p { color: var(--gray); margin-bottom: 40px; font-size: 16px; }
-.contact-details { display: flex; flex-direction: column; gap: 24px; }
-.contact-item { display: flex; gap: 16px; align-items: flex-start; }
-.contact-item i { font-size: 18px; color: var(--primary); margin-top: 2px; width: 24px; }
-.contact-item h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; color: var(--dark); }
-.contact-item p { font-size: 14px; color: var(--gray); line-height: 1.6; }
-.contact-form { display: flex; flex-direction: column; gap: 16px; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.contact-form input, .contact-form select, .contact-form textarea { width: 100%; padding: 14px 16px; border: 1px solid #E5E7EB; border-radius: 10px; font-family: var(--font-body); font-size: 14px; transition: border-color 0.3s, box-shadow 0.3s; outline: none; background: var(--white); }
-.contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(124,58,237,0.1); }
-.contact-form textarea { resize: vertical; }
-.contact-form .btn { align-self: flex-start; }
+    .nav-links {
+      display: flex;
+      gap: 2.25rem;
+      list-style: none;
+    }
 
-.footer { background: var(--dark); color: rgba(255,255,255,0.8); padding: 80px 0 0; }
-.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.06); }
-.footer-brand .logo { color: var(--white); font-size: 24px; display: inline-block; margin-bottom: 16px; }
-.footer-brand p { font-size: 14px; line-height: 1.8; margin-bottom: 24px; color: rgba(255,255,255,0.5); }
-.social-links { display: flex; gap: 12px; }
-.social-links a { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.1); border-radius: 50%; color: rgba(255,255,255,0.5); text-decoration: none; transition: all 0.3s; }
-.social-links a:hover { background: var(--primary); border-color: var(--primary); color: var(--white); transform: translateY(-2px); }
-.footer-links h4 { font-family: var(--font-display); font-size: 14px; color: var(--white); margin-bottom: 20px; letter-spacing: 0.5px; }
-.footer-links ul { list-style: none; }
-.footer-links li { margin-bottom: 12px; }
-.footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 14px; transition: color 0.3s; }
-.footer-links a:hover { color: var(--primary-light); }
-.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; font-size: 13px; color: rgba(255,255,255,0.3); }
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      transition: color 0.3s;
+      letter-spacing: 0.3px;
+    }
 
-.toast { position: fixed; bottom: 32px; right: 32px; background: var(--dark); color: var(--white); padding: 14px 24px; border-radius: 10px; font-size: 14px; z-index: 5000; transform: translateY(20px); opacity: 0; pointer-events: none; transition: all 0.4s; box-shadow: 0 4px 24px rgba(0,0,0,0.2); }
-.toast.show { transform: translateY(0); opacity: 1; pointer-events: all; }
+    .nav-links a:hover {
+      color: var(--text);
+    }
 
-@media (max-width: 1024px) {
-  .services-grid { grid-template-columns: repeat(2,1fr); }
-  .testimonial-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
-  .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-}
-@media (max-width: 768px) {
-  .navbar { padding: 14px 20px; }
-  .nav-toggle { display: flex; }
-  .nav-cta { display: none; }
-  .nav-links { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: var(--white); flex-direction: column; padding: 80px 32px 32px; gap: 24px; transition: right 0.4s; box-shadow: -4px 0 20px rgba(0,0,0,0.1); z-index: 999; }
-  .nav-links.open { right: 0; }
-  .hero { min-height: 90vh; padding: 100px 20px 60px; }
-  .hero-buttons { flex-direction: column; align-items: center; }
-  .work-grid { grid-template-columns: 1fr; }
-  .stats-grid { grid-template-columns: repeat(2,1fr); gap: 24px; }
-  .services-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
-  .form-row { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr; gap: 40px; }
-  .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
-  .services, .work, .about, .testimonials, .contact { padding: 80px 0; }
-}
-@media (max-width: 480px) {
-  .stats-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
-  .stat-number { font-size: 32px; }
-}
-</style>
+    .nav-hire {
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 0.55rem 1.4rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--text);
+      transition: all 0.3s;
+    }
+
+    .nav-hire:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 200;
+    }
+
+    .hamburger span {
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      transition: all 0.3s;
+    }
+
+    /* ─── MOBILE NAV ─── */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 150;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .mobile-nav.active {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      transition: color 0.3s;
+    }
+
+    .mobile-nav a:hover {
+      color: var(--text);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    footer a {
+      color: var(--text-muted);
+      transition: color 0.3s;
+    }
+
+    footer a:hover {
+      color: var(--text);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 3rem 4rem;
+      position: relative;
+    }
+
+    .hero-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--text-dim);
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-family: var(--sans);
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      max-width: 900px;
+    }
+
+    .hero h1 .serif {
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      margin-top: 2rem;
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      margin-top: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      background: var(--text);
+      color: var(--bg);
+      font-size: 0.88rem;
+      font-weight: 600;
+      border-radius: 100px;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.88rem;
+      font-weight: 500;
+      border-radius: 100px;
+      transition: all 0.3s;
+      cursor: pointer;
+      background: none;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .hero-clients {
+      margin-top: 5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .hero-clients-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-dim);
+      margin-bottom: 1.5rem;
+    }
+
+    .clients-marquee {
+      overflow: hidden;
+      position: relative;
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
+
+    .clients-track {
+      display: flex;
+      gap: 3rem;
+      animation: marquee 30s linear infinite;
+      width: max-content;
+    }
+
+    .client-name {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      white-space: nowrap;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      padding: 7rem 3rem;
+    }
+
+    .section-counter {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--text-dim);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-counter::before {
+      content: '';
+      width: 30px;
+      height: 1px;
+      background: var(--text-dim);
+    }
+
+    .section-title {
+      font-family: var(--sans);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.15;
+      max-width: 750px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ─── ABOUT ─── */
+    .about {
+      border-top: 1px solid var(--border);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .about-feature {
+      padding: 1.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: border-color 0.3s;
+    }
+
+    .about-feature:hover {
+      border-color: var(--accent);
+    }
+
+    .about-feature-num {
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .about-feature h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .about-feature p {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .stat-card {
+      padding: 1.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .stat-number {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      margin-top: 0.25rem;
+    }
+
+    /* ─── SERVICES ─── */
+    .services {
+      border-top: 1px solid var(--border);
+    }
+
+    .services-intro {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 650px;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+    }
+
+    .services-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-item {
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .service-item:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .service-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .service-header h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .service-arrow {
+      font-size: 1.5rem;
+      color: var(--text-dim);
+      transition: transform 0.3s, color 0.3s;
+    }
+
+    .service-item:hover .service-arrow {
+      color: var(--accent);
+      transform: translateX(5px);
+    }
+
+    .service-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+
+    .service-item.active .service-body {
+      max-height: 300px;
+      padding-top: 1.25rem;
+    }
+
+    .service-body p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 600px;
+      margin-bottom: 1rem;
+    }
+
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .service-tag {
+      font-size: 0.75rem;
+      padding: 0.35rem 0.85rem;
+      background: var(--accent-dim);
+      color: var(--accent);
+      border-radius: 100px;
+      border: 1px solid rgba(200, 162, 255, 0.15);
+    }
+
+    .service-cta {
+      margin-top: 3rem;
+    }
+
+    /* ─── WORK ─── */
+    .work {
+      border-top: 1px solid var(--border);
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .work-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      aspect-ratio: 16/10;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .work-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .work-card-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--bg-card), #1a1528);
+      z-index: 0;
+    }
+
+    .work-card-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 50%, rgba(200,162,255,0.08), transparent 60%);
+    }
+
+    .work-card-content {
+      position: relative;
+      z-index: 1;
+      padding: 2rem;
+    }
+
+    .work-card-num {
+      font-size: 0.7rem;
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .work-card h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .work-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 400px;
+    }
+
+    .work-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1rem;
+    }
+
+    .work-card-tag {
+      font-size: 0.7rem;
+      padding: 0.25rem 0.7rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 100px;
+      color: var(--text-muted);
+    }
+
+    .work-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 1rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--accent);
+      transition: color 0.3s;
+    }
+
+    .work-card-link:hover {
+      color: #fff;
+    }
+
+    /* ─── PROCESS ─── */
+    .process {
+      border-top: 1px solid var(--border);
+    }
+
+    .process-intro {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      line-height: 1.8;
+      margin-bottom: 4rem;
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+    }
+
+    .process-step {
+      padding: 2rem 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--bg-card);
+      transition: border-color 0.3s, transform 0.3s;
+      position: relative;
+    }
+
+    .process-step:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .process-step-num {
+      font-size: 2rem;
+      font-family: var(--serif);
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      opacity: 0.6;
+    }
+
+    .process-step h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+
+    .process-step p {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    /* ─── TECH ─── */
+    .tech {
+      border-top: 1px solid var(--border);
+    }
+
+    .tech-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .tech-pill {
+      padding: 0.6rem 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      background: var(--bg-card);
+      transition: all 0.3s;
+    }
+
+    .tech-pill:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    /* ─── FAQ ─── */
+    .faq {
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-list {
+      max-width: 750px;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-item:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.5rem 0;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .faq-question h4 {
+      font-size: 1.05rem;
+      font-weight: 500;
+    }
+
+    .faq-toggle {
+      font-size: 1.5rem;
+      color: var(--text-dim);
+      transition: transform 0.3s, color 0.3s;
+      flex-shrink: 0;
+    }
+
+    .faq-item.active .faq-toggle {
+      transform: rotate(45deg);
+      color: var(--accent);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 300px;
+    }
+
+    .faq-answer p {
+      padding-bottom: 1.5rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ─── CONTACT ─── */
+    .contact {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 8rem 3rem;
+    }
+
+    .contact .section-counter {
+      justify-content: center;
+    }
+
+    .contact .section-counter::before {
+      display: none;
+    }
+
+    .contact .section-title {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .contact-links a {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      transition: color 0.3s;
+    }
+
+    .contact-links a:hover {
+      color: var(--accent);
+    }
+
+    .contact-links .email {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-style: italic;
+      color: var(--text);
+    }
+
+    .contact-address {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    /* ─── REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .process-steps {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      nav.scrolled {
+        padding: 0.75rem 1.5rem;
+      }
+
+      .nav-links, .nav-hire {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      section, .hero, .contact {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+
+      .hero {
+        padding-top: 6rem;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .about-features {
+        grid-template-columns: 1fr;
+      }
+
+      .work-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .process-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .service-header h3 {
+        font-size: 1.1rem;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <header id="header">
-    <nav class="navbar">
-      <a href="#" class="logo">IRIS<span>LABS</span></a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#home" class="active">Home</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#work">Our Work</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <div class="nav-toggle" id="navToggle">
-        <span></span><span></span><span></span>
-      </div>
-    </nav>
-  </header>
-
-  <section id="home" class="hero">
-    <div class="hero-bg">
-      <div class="gradient-sphere"></div>
-      <div class="gradient-sphere two"></div>
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">iris<span>.</span>labs</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="#contact" class="nav-hire">Let's Talk</a>
+    <div class="hamburger" id="hamburger" onclick="toggleMobile()">
+      <span></span><span></span><span></span>
     </div>
-    <div class="hero-content">
-      <span class="hero-badge">Digital Agency Since 2020</span>
-      <h1 class="hero-title">We Build Websites<br>That <span>Grow</span> Businesses</h1>
-      <p class="hero-text">From jewelry stores to bakeries — we craft stunning, high-performing websites that help local businesses shine online.</p>
-      <div class="hero-buttons">
-        <a href="#work" class="btn btn-primary">View Our Work</a>
-      </div>
-      <div class="hero-clients">
-        <span>Trusted by</span>
-        <div class="client-logos">
-          <span>Senco Golds</span>
-          <span>Bella's Bakery</span>
-          <span>The Urban Cafe</span>
-          <span>Bloom Florists</span>
-        </div>
-      </div>
-    </div>
-  </section>
+  </nav>
 
-  <section id="services" class="services">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">What We Do</span>
-        <h2>Full-Service Web Agency</h2>
-        <p>We handle everything from design to deployment, so you don't have to.</p>
-      </div>
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-icon"><i class="fas fa-palette"></i></div>
-          <h3>Web Design</h3>
-          <p>Beautiful, brand-aligned designs that captivate your audience from the first click.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon"><i class="fas fa-code"></i></div>
-          <h3>Development</h3>
-          <p>Clean, performant code using modern frameworks and best practices.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon"><i class="fas fa-store"></i></div>
-          <h3>E-Commerce</h3>
-          <p>Custom online stores with seamless checkout, inventory, and payment integration.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon"><i class="fas fa-chart-line"></i></div>
-          <h3>SEO & Growth</h3>
-          <p>Search-engine optimized sites that help your business get found online.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#about" onclick="toggleMobile()">About</a>
+    <a href="#services" onclick="toggleMobile()">Services</a>
+    <a href="#work" onclick="toggleMobile()">Work</a>
+    <a href="#process" onclick="toggleMobile()">Process</a>
+    <a href="#faq" onclick="toggleMobile()">FAQ</a>
+    <a href="#contact" onclick="toggleMobile()">Contact</a>
+  </div>
 
-  <section id="work" class="work">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Our Portfolio</span>
-        <h2>Websites We've Built</h2>
-        <p>Every project is tailored to the client's unique brand and goals.</p>
-      </div>
-      <div class="work-grid">
-        <div class="work-card">
-          <div class="work-img">
-            <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&q=80" alt="Jewelry Store Website">
-            <div class="work-overlay">
-              <div class="work-links">
-                <a href="#" class="btn btn-outline"><i class="fas fa-external-link-alt"></i> Live Site</a>
-              </div>
-            </div>
-          </div>
-          <div class="work-info">
-            <span class="work-tag">Jewelry</span>
-            <h3>Senco Golds & Diamonds</h3>
-            <p>Full e-commerce website with product catalog, cart, and checkout for a luxury jewelry brand.</p>
-          </div>
-        </div>
-        <div class="work-card">
-          <div class="work-img">
-            <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=600&q=80" alt="Bakery Website">
-            <div class="work-overlay">
-              <div class="work-links">
-                <a href="#" class="btn btn-outline"><i class="fas fa-external-link-alt"></i> Live Site</a>
-              </div>
-            </div>
-          </div>
-          <div class="work-info">
-            <span class="work-tag">Bakery</span>
-            <h3>Bella's Artisan Bakery</h3>
-            <p>Mouth-watering menu showcase with online ordering and delivery integration.</p>
-          </div>
-        </div>
-        <div class="work-card">
-          <div class="work-img">
-            <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=600&q=80" alt="Cafe Website">
-            <div class="work-overlay">
-              <div class="work-links">
-                <a href="#" class="btn btn-outline"><i class="fas fa-external-link-alt"></i> Live Site</a>
-              </div>
-            </div>
-          </div>
-          <div class="work-info">
-            <span class="work-tag">Cafe</span>
-            <h3>The Urban Cafe</h3>
-            <p>Menu-centric responsive site with table reservation system and location finder.</p>
-          </div>
-        </div>
-        <div class="work-card">
-          <div class="work-img">
-            <img src="https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=600&q=80" alt="Florist Website">
-            <div class="work-overlay">
-              <div class="work-links">
-                <a href="#" class="btn btn-outline"><i class="fas fa-external-link-alt"></i> Live Site</a>
-              </div>
-            </div>
-          </div>
-          <div class="work-info">
-            <span class="work-tag">Florist</span>
-            <h3>Bloom Florists</h3>
-            <p>Elegant floral shop website with same-day delivery booking and seasonal catalog.</p>
-          </div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-label">AI Strategy & Engineering</div>
+    <h1>We build AI that<br>turns data into<br><span class="serif">decisions.</span></h1>
+    <p class="hero-sub">Iris Labs is an Austin-based AI consultancy that designs, builds, and deploys production AI systems — from strategy to shipping.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Start a Conversation →</a>
+      <a href="#work" class="btn-secondary">See Our Work</a>
+    </div>
+    <div class="hero-clients">
+      <div class="hero-clients-label">Trusted by teams at</div>
+      <div class="clients-marquee">
+        <div class="clients-track">
+          <span class="client-name">Boeing</span>
+          <span class="client-name">Samsung</span>
+          <span class="client-name">PayPal</span>
+          <span class="client-name">Verizon</span>
+          <span class="client-name">BlackBerry</span>
+          <span class="client-name">Macy's</span>
+          <span class="client-name">Kaiser Permanente</span>
+          <span class="client-name">BambooHR</span>
+          <span class="client-name">American Eagle</span>
+          <span class="client-name">SparkCognition</span>
+          <span class="client-name">Digication</span>
+          <span class="client-name">xiQ</span>
+          <span class="client-name">Altia</span>
+          <span class="client-name">Viptella</span>
+          <span class="client-name">University of Arizona</span>
+          <!-- Duplicate for seamless loop -->
+          <span class="client-name">Boeing</span>
+          <span class="client-name">Samsung</span>
+          <span class="client-name">PayPal</span>
+          <span class="client-name">Verizon</span>
+          <span class="client-name">BlackBerry</span>
+          <span class="client-name">Macy's</span>
+          <span class="client-name">Kaiser Permanente</span>
+          <span class="client-name">BambooHR</span>
+          <span class="client-name">American Eagle</span>
+          <span class="client-name">SparkCognition</span>
+          <span class="client-name">Digication</span>
+          <span class="client-name">xiQ</span>
+          <span class="client-name">Altia</span>
+          <span class="client-name">Viptella</span>
+          <span class="client-name">University of Arizona</span>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="stats-section">
-    <div class="container">
-      <div class="stats-grid">
-        <div class="stat-item">
-          <span class="stat-number" data-target="10" data-suffix="+">10+</span>
-          <span class="stat-label">Projects Delivered</span>
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="section-counter reveal">01 / 06 — About</div>
+    <h2 class="section-title reveal">The team<br>behind the <span class="serif">intelligence.</span></h2>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p><strong>Iris Labs</strong> is an Austin-based AI consultancy built by practitioners. We've shipped AI systems at scale across some of the world's most demanding tech ecosystems.</p>
+        <p>We operate from Silicon Hills, partnering with teams anywhere serious about building production AI. No layers. No overhead. You work directly with senior engineers and strategists who have built and led AI systems at companies that matter.</p>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number">$10M</div>
+            <div class="stat-label">Business Value Created</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">3x</div>
+            <div class="stat-label">Faster Time-to-Market</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">20+</div>
+            <div class="stat-label">Companies Supported</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">30+</div>
+            <div class="stat-label">Years of AI Expertise</div>
+          </div>
         </div>
-        <div class="stat-item">
-          <span class="stat-number" data-target="10" data-suffix="+">10+</span>
-          <span class="stat-label">Happy Clients</span>
+      </div>
+      <div class="about-features reveal">
+        <div class="about-feature">
+          <div class="about-feature-num">[01]</div>
+          <h4>AI-Native</h4>
+          <p>Built from the ground up around AI — not an afterthought bolted onto consulting.</p>
         </div>
-        <div class="stat-item">
-          <span class="stat-number" data-target="100" data-suffix="%">100%</span>
-          <span class="stat-label">Client Satisfaction</span>
+        <div class="about-feature">
+          <div class="about-feature-num">[02]</div>
+          <h4>Practitioner-Led</h4>
+          <p>Every engagement is led by someone who has shipped production AI systems.</p>
         </div>
-        <div class="stat-item">
-          <span class="stat-number" data-target="1" data-suffix=" yr">1 yr</span>
-          <span class="stat-label">In Business</span>
+        <div class="about-feature">
+          <div class="about-feature-num">[03]</div>
+          <h4>End-to-End</h4>
+          <p>Strategy, architecture, engineering, deployment, and governance — under one roof.</p>
+        </div>
+        <div class="about-feature">
+          <div class="about-feature-num">[04]</div>
+          <h4>Production-First</h4>
+          <p>We don't do demos. We build systems that hold up under real business load.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="about" class="about">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-content">
-          <span class="section-tag">About Us</span>
-          <h2>We're a Small Team with Big Ambitions</h2>
-          <p>IrisLabs was founded with a simple mission: make professional web development accessible to local businesses. We believe every business — whether a jewelry store, a bakery, or a florist — deserves a website that looks amazing and drives results.</p>
-          <p>Our team of designers, developers, and strategists work closely with each client to understand their brand, their customers, and their goals. The result? Websites that don't just look good — they grow businesses.</p>
-          <div class="about-features">
-            <div class="about-feature">
-              <i class="fas fa-check-circle"></i>
-              <span>Custom designs, no templates</span>
-            </div>
-            <div class="about-feature">
-              <i class="fas fa-check-circle"></i>
-              <span>Mobile-first approach</span>
-            </div>
-            <div class="about-feature">
-              <i class="fas fa-check-circle"></i>
-              <span>SEO-optimized from day one</span>
-            </div>
-            <div class="about-feature">
-              <i class="fas fa-check-circle"></i>
-              <span>Ongoing support & maintenance</span>
-            </div>
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="section-counter reveal">02 / 06 — Services</div>
+    <h2 class="section-title reveal">Five ways we ship<br><span class="serif">with you.</span></h2>
+    <p class="services-intro reveal">Whether you need a plan, a build, a leader, or an operator — we have an engagement model for where you are in your AI journey.</p>
+    <div class="services-list reveal">
+      <div class="service-item" onclick="toggleService(this)">
+        <div class="service-header">
+          <h3>AI Strategy</h3>
+          <span class="service-arrow">→</span>
+        </div>
+        <div class="service-body">
+          <p>We embed with your team to assess your business, identify high-value AI opportunities, and deliver a roadmap with clear priorities and build-versus-buy decisions.</p>
+          <div class="service-tags">
+            <span class="service-tag">Roadmapping</span>
+            <span class="service-tag">Use Case Identification</span>
+            <span class="service-tag">Organizational Readiness</span>
           </div>
         </div>
-        <div class="about-image">
-          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80" alt="IrisLabs Team">
+      </div>
+      <div class="service-item" onclick="toggleService(this)">
+        <div class="service-header">
+          <h3>Fractional AI Leadership</h3>
+          <span class="service-arrow">→</span>
+        </div>
+        <div class="service-body">
+          <p>Senior technical leadership embedded in your team. We step in as Head of AI, CTO, or Head of Innovation to translate strategy into execution.</p>
+          <div class="service-tags">
+            <span class="service-tag">Head of AI</span>
+            <span class="service-tag">Fractional CTO</span>
+            <span class="service-tag">Execution Oversight</span>
+            <span class="service-tag">AI Transformation</span>
+          </div>
+        </div>
+      </div>
+      <div class="service-item" onclick="toggleService(this)">
+        <div class="service-header">
+          <h3>AI Engineering</h3>
+          <span class="service-arrow">→</span>
+        </div>
+        <div class="service-body">
+          <p>We design and build custom AI solutions end-to-end. Fine-tuned models, retrieval pipelines, full platform integrations — scoped, shipped, and supported.</p>
+          <div class="service-tags">
+            <span class="service-tag">LLM Integration</span>
+            <span class="service-tag">MLOps</span>
+            <span class="service-tag">Custom Models</span>
+            <span class="service-tag">RAG Pipelines</span>
+          </div>
+        </div>
+      </div>
+      <div class="service-item" onclick="toggleService(this)">
+        <div class="service-header">
+          <h3>Governance, Risk & Compliance</h3>
+          <span class="service-arrow">→</span>
+        </div>
+        <div class="service-body">
+          <p>We help you deploy AI responsibly and stay audit-ready. From policy frameworks to controls aligned with global AI regulations.</p>
+          <div class="service-tags">
+            <span class="service-tag">EU AI Act</span>
+            <span class="service-tag">NIST AI RMF</span>
+            <span class="service-tag">ISO 42001</span>
+            <span class="service-tag">Audit & Controls</span>
+          </div>
+        </div>
+      </div>
+      <div class="service-item" onclick="toggleService(this)">
+        <div class="service-header">
+          <h3>AI Agents & Automation</h3>
+          <span class="service-arrow">→</span>
+        </div>
+        <div class="service-body">
+          <p>We design and deploy AI agents that work in real business environments. From single-task assistants to multi-agent systems across your workflows.</p>
+          <div class="service-tags">
+            <span class="service-tag">Autonomous Agents</span>
+            <span class="service-tag">Multi-Agent Systems</span>
+            <span class="service-tag">Workflow Automation</span>
+            <span class="service-tag">Tool Use</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="service-cta">
+      <a href="#contact" class="btn-secondary">Let's Talk →</a>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section class="work" id="work">
+    <div class="section-counter reveal">03 / 06 — Selected Work</div>
+    <h2 class="section-title reveal">Strategy meets<br><span class="serif">production.</span></h2>
+    <div class="work-grid">
+      <div class="work-card reveal">
+        <div class="work-card-bg"></div>
+        <div class="work-card-content">
+          <div class="work-card-num">[01]</div>
+          <h3>Pushraj Jain & Sons</h3>
+          <p>A premium clothing-store website featuring elegant product collections and a modern shopping experience. Built to reflect timeless style with a contemporary edge.</p>
+          <div class="work-card-tags">
+            <span class="work-card-tag">E-Commerce</span>
+            <span class="work-card-tag">Fashion</span>
+            <span class="work-card-tag">Responsive</span>
+          </div>
+          <a href="https://pushraj-jain-and-sons-website.vercel.app/" target="_blank" class="work-card-link">View Live Website →</a>
+        </div>
+      </div>
+      <div class="work-card reveal">
+        <div class="work-card-bg"></div>
+        <div class="work-card-content">
+          <div class="work-card-num">[02]</div>
+          <h3>Lakhotiyas Cake & Bakers</h3>
+          <p>A colourful and inviting bakery website showcasing cakes, products, categories, and ordering options. Designed to make mouths water and orders flow in.</p>
+          <div class="work-card-tags">
+            <span class="work-card-tag">Bakery</span>
+            <span class="work-card-tag">UI Design</span>
+            <span class="work-card-tag">Responsive</span>
+          </div>
+          <a href="https://lakhotiyas-bakery-website-demo.vercel.app/" target="_blank" class="work-card-link">View Live Website →</a>
+        </div>
+      </div>
+      <div class="work-card reveal">
+        <div class="work-card-bg"></div>
+        <div class="work-card-content">
+          <div class="work-card-num">[03]</div>
+          <h3>PM Jewellers & Sons</h3>
+          <p>A premium jewellery website designed with elegant product displays and a luxurious browsing experience. Crafted to reflect heritage and craftsmanship.</p>
+          <div class="work-card-tags">
+            <span class="work-card-tag">Jewellery</span>
+            <span class="work-card-tag">Premium</span>
+            <span class="work-card-tag">Responsive</span>
+          </div>
+          <a href="https://pmjewellersnsons.lovable.app/" target="_blank" class="work-card-link">View Live Website →</a>
+        </div>
+      </div>
+      <div class="work-card reveal">
+        <div class="work-card-bg"></div>
+        <div class="work-card-content">
+          <div class="work-card-num">[04]</div>
+          <h3>Cake Joints</h3>
+          <p>A delightful cake shop website with a warm, inviting aesthetic. Showcasing products and categories with a seamless user experience.</p>
+          <div class="work-card-tags">
+            <span class="work-card-tag">Bakery</span>
+            <span class="work-card-tag">E-Commerce</span>
+            <span class="work-card-tag">Responsive</span>
+          </div>
+          <a href="https://cakejoints.vercel.app/" target="_blank" class="work-card-link">View Live Website →</a>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="testimonials">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Testimonials</span>
-        <h2>What Our Clients Say</h2>
+  <!-- PROCESS -->
+  <section class="process" id="process">
+    <div class="section-counter reveal">04 / 06 — How We Work</div>
+    <h2 class="section-title reveal">No black boxes.<br>Clear <span class="serif">thinking.</span></h2>
+    <p class="process-intro reveal">End-to-end AI delivery — from strategy to production. Our process is transparent, structured, and built to ship.</p>
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="process-step-num">01</div>
+        <h4>Discovery</h4>
+        <p>We understand your business, your data, and where AI can move the needle. We identify and prioritize high-value use cases.</p>
       </div>
-      <div class="testimonial-grid">
-        <div class="testimonial-card">
-          <div class="stars">
-            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-          </div>
-          <p>"IrisLabs transformed our online presence. Our jewelry website now looks as premium as our products, and online sales have tripled since launch."</p>
-          <div class="client-info">
-            <h4>Rajesh Sen</h4>
-            <span>Owner, Senco Golds & Diamonds</span>
-          </div>
+      <div class="process-step reveal">
+        <div class="process-step-num">02</div>
+        <h4>Architecture</h4>
+        <p>We design the system before writing a line of code. Models, pipelines, agents, integrations — scoped to your stack.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-step-num">03</div>
+        <h4>Build</h4>
+        <p>Our engineers ship working AI — agents, pipelines, APIs, and the infrastructure around them.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-step-num">04</div>
+        <h4>Integration</h4>
+        <p>We connect what we build to your real systems — data platforms, APIs, internal tools, and workflows.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-step-num">05</div>
+        <h4>Launch & Iterate</h4>
+        <p>Deployment is not the finish line. We monitor, measure, and improve — ensuring your AI delivers value.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH -->
+  <section class="tech" id="tech">
+    <div class="section-counter reveal">05 / 06 — Technologies</div>
+    <h2 class="section-title reveal">Tools we <span class="serif">ship with.</span></h2>
+    <div class="tech-grid reveal">
+      <span class="tech-pill">Python</span>
+      <span class="tech-pill">OpenAI</span>
+      <span class="tech-pill">Hugging Face</span>
+      <span class="tech-pill">PyTorch</span>
+      <span class="tech-pill">TensorFlow</span>
+      <span class="tech-pill">React</span>
+      <span class="tech-pill">AWS</span>
+      <span class="tech-pill">Google Cloud</span>
+      <span class="tech-pill">Azure</span>
+      <span class="tech-pill">Docker</span>
+      <span class="tech-pill">Kubernetes</span>
+      <span class="tech-pill">Kafka</span>
+      <span class="tech-pill">Apache Spark</span>
+      <span class="tech-pill">PostgreSQL</span>
+      <span class="tech-pill">Redis</span>
+      <span class="tech-pill">Elasticsearch</span>
+      <span class="tech-pill">Pandas</span>
+      <span class="tech-pill">scikit-learn</span>
+      <span class="tech-pill">Jupyter</span>
+      <span class="tech-pill">Node.js</span>
+      <span class="tech-pill">Temporal</span>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="section-counter reveal">06 / 06 — FAQ</div>
+    <h2 class="section-title reveal">You've got <span class="serif">questions.</span><br>We've got answers.</h2>
+    <div class="faq-list">
+      <div class="faq-item reveal" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <h4>How do you price engagements?</h4>
+          <span class="faq-toggle">+</span>
         </div>
-        <div class="testimonial-card">
-          <div class="stars">
-            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-          </div>
-          <p>"Working with IrisLabs was effortless. They understood our bakery brand perfectly and delivered a site that makes customers hungry just browsing it."</p>
-          <div class="client-info">
-            <h4>Bella Montez</h4>
-            <span>Founder, Bella's Artisan Bakery</span>
-          </div>
+        <div class="faq-answer">
+          <p>It depends on scope. Strategy roadmaps, fractional leadership retainers, and engineering projects each have different structures. We'll give you an honest quote after a discovery call. No surprises, no hidden fees.</p>
         </div>
-        <div class="testimonial-card">
-          <div class="stars">
-            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-          </div>
-          <p>"Professional, responsive, and incredibly talented. Our cafe website has brought in so many new customers who found us through search."</p>
-          <div class="client-info">
-            <h4>James Walker</h4>
-            <span>Owner, The Urban Cafe</span>
-          </div>
+      </div>
+      <div class="faq-item reveal" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <h4>How fast can you deliver?</h4>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>We work in focused sprints. Strategy roadmaps in 2–4 weeks. Engineering projects from 4–12 weeks depending on complexity. We move fast because your competitive window is shrinking.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <h4>Do you work with startups or only enterprises?</h4>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>Both. We've worked with Series B fintechs and Fortune 500 retailers. What matters is that you're serious about building production AI — not just running experiments.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <h4>What makes you different from big consulting firms?</h4>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>No layers. No overhead. You work directly with senior practitioners who've actually built AI systems — not junior analysts reading playbooks. We ship, not just advise.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <h4>Why wouldn't this be a fit?</h4>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>If you're looking for a vendor to hand off to without any collaboration, or if you want AI for a press release rather than production — we're probably not the right partner.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="contact" class="contact">
-    <div class="container">
-      <div class="contact-info" style="text-align:center; max-width:600px; margin:0 auto;">
-        <span class="section-tag">Let's Talk</span>
-        <h2>Ready to Build Your Website?</h2>
-        <p>Tell us about your project and we'll craft a solution that fits your brand and budget.</p>
-        <div class="contact-details" style="margin-top:40px; display:flex; flex-direction:column; gap:24px; align-items:center;">
-          <div class="contact-item">
-            <i class="fas fa-envelope"></i>
-            <div>
-              <h4>Email</h4>
-              <p>kavyajha1620@gmail.com</p>
-            </div>
-          </div>
-          <div class="contact-item">
-            <i class="fas fa-phone"></i>
-            <div>
-              <h4>Phone</h4>
-              <p>+91 7250956394</p>
-            </div>
-          </div>
-          <div class="contact-item">
-            <i class="fas fa-map-marker-alt"></i>
-            <div>
-              <h4>Location</h4>
-              <p>Serving businesses worldwide — remote-first</p>
-            </div>
-          </div>
-          <div class="contact-item">
-            <i class="fas fa-clock"></i>
-            <div>
-              <h4>Response Time</h4>
-              <p>Typically within 24 hours</p>
-            </div>
-          </div>
-        </div>
-      </div>
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="section-counter reveal">Let's Build What's Next</div>
+    <h2 class="section-title reveal" style="max-width:700px;">Need AI strategy,<br>engineering, or <span class="serif">leadership?</span></h2>
+    <div class="contact-links reveal">
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=kavyajha1620@gmail.com" class="email">team@irislabs.co</a>
+      <a href="tel:+17377478757">+91 7250956394</a>
+      <div class="contact-address">11801 Domain Blvd, 3rd Floor, Austin, TX 78758</div>
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=kavyajha1620@gmail.com" class="btn-primary" style="margin-top:1rem;">Start a Conversation →</a>
     </div>
   </section>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="#" class="logo">IRIS<span>LABS</span></a>
-          <p>We build websites that grow businesses. From concept to launch, we're your partner in the digital space.</p>
-          <div class="social-links">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-dribbble"></i></a>
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#"><i class="fab fa-github"></i></a>
-          </div>
-        </div>
-        <div class="footer-links">
-          <h4>Services</h4>
-          <ul>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">E-Commerce</a></li>
-            <li><a href="#">SEO Optimization</a></li>
-            <li><a href="#">Maintenance</a></li>
-          </ul>
-        </div>
-        <div class="footer-links">
-          <h4>Industries</h4>
-          <ul>
-            <li><a href="#">Jewelry Stores</a></li>
-            <li><a href="#">Bakeries & Cafes</a></li>
-            <li><a href="#">Restaurants</a></li>
-            <li><a href="#">Retail & E-Commerce</a></li>
-            <li><a href="#">Service Businesses</a></li>
-          </ul>
-        </div>
-        <div class="footer-links">
-          <h4>Quick Links</h4>
-          <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#work">Our Work</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 IrisLabs. All rights reserved.</p>
-        <p>Built with <i class="fas fa-heart" style="color: var(--primary);"></i> for local businesses</p>
-      </div>
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2026 Iris Labs LLC. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
     </div>
   </footer>
 
-  <script src="js/script.js"></script>
+  <script>
+    // Nav scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Mobile nav
+    function toggleMobile() {
+      document.getElementById('mobileNav').classList.toggle('active');
+    }
+
+    // Service accordion
+    function toggleService(el) {
+      const wasActive = el.classList.contains('active');
+      document.querySelectorAll('.service-item').forEach(s => s.classList.remove('active'));
+      if (!wasActive) el.classList.add('active');
+    }
+
+    // FAQ accordion
+    function toggleFaq(el) {
+      const wasActive = el.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('active'));
+      if (!wasActive) el.classList.add('active');
+    }
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
