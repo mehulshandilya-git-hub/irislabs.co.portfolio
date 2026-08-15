@@ -301,6 +301,22 @@
     });
   }
 
+  /* ------------------------ gmail compose popup ------------------------ */
+  function initGmailCompose() {
+    var els = document.querySelectorAll('[data-gmail]');
+    if (!els.length) return;
+    els.forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        var to = el.getAttribute('data-gmail');
+        if (!to) return;
+        e.preventDefault();
+        var subject = encodeURIComponent(el.getAttribute('data-subject') || 'Project Inquiry');
+        var url = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(to) + '&su=' + subject;
+        window.open(url, '_blank', 'noopener,noreferrer');
+      });
+    });
+  }
+
   /* --------------------------- particles --------------------------- */
   function initParticles() {
     var canvas = document.querySelector('[data-particles]');
@@ -476,6 +492,7 @@
     initTimeline();
     initWorkTrack();
     initFaq();
+    initGmailCompose();
     initCursor();
   });
 })();
